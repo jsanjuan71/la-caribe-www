@@ -1039,27 +1039,25 @@
   <section id="info" style="background:#0d0d0d">
     <div class="inner">
       <div class="info-block reveal delay-1">
-        <h3>Horarios</h3>
-        <div class="horario-row">
-          <span>Martes a Jueves</span>
-          <span>11:00 AM – 7:00 PM</span>
-        </div>
-        <div class="horario-row">
-          <span>Viernes</span>
-          <span>6:00 PM – Medianoche</span>
-        </div>
-        <div class="horario-row">
-          <span>Sábado y Domingo</span>
-          <span>10:00 AM – Medianoche</span>
-        </div>
-        <div class="horario-row closed">
-          <span>Lunes</span>
-          <span>Cerrado</span>
-        </div>
+        <h3>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5C518" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;margin-top:-2px">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          Horarios
+        </h3>
+        <div class="horario-row"><span>Martes a Jueves</span><span>11:00 AM – 7:00 PM</span></div>
+        <div class="horario-row"><span>Viernes</span><span>6:00 PM – Medianoche</span></div>
+        <div class="horario-row"><span>Sábado y Domingo</span><span>10:00 AM – Medianoche</span></div>
+        <div class="horario-row closed"><span>Lunes</span><span>Cerrado</span></div>
       </div>
 
       <div class="info-block reveal delay-2">
-        <h3>Ubicación</h3>
+        <h3>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#39FF14" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;margin-top:-2px">
+            <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          Ubicación
+        </h3>
         <p>Platino 2, Arenales Tapatíos<br/>Zapopan, Jalisco, México</p>
         <br/>
         <a href="https://maps.google.com/?q=Arenales+Tapatios+Zapopan+Jalisco" target="_blank" rel="noopener">
@@ -1068,11 +1066,16 @@
       </div>
 
       <div class="info-block reveal delay-3">
-        <h3>Contacto &amp; Pedidos</h3>
+        <h3>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#39FF14" style="vertical-align:middle;margin-right:6px;margin-top:-2px">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.112 1.524 5.837L.057 23.886a.5.5 0 0 0 .611.61l6.102-1.458A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.87 9.87 0 0 1-5.031-1.376l-.36-.214-3.733.892.923-3.658-.235-.376A9.862 9.862 0 0 1 2.1 12C2.1 6.534 6.534 2.1 12 2.1c5.465 0 9.9 4.434 9.9 9.9 0 5.465-4.435 9.9-9.9 9.9z"/>
+          </svg>
+          Contacto &amp; Pedidos
+        </h3>
         <ul>
           <li>
             <a href="https://wa.me/523316063421?text=Hola%20La%20Caribe%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">
-              📱 WhatsApp: 331 606 3421
+              331 606 3421
             </a>
           </li>
           <li style="margin-top:1.5rem">
@@ -1236,13 +1239,17 @@
     /* ── NAV scroll ── */
     const nav = document.getElementById('nav');
     const waFloat = document.querySelector('.wa-float');
-    const heroHeight = document.getElementById('hero').offsetHeight;
+    const heroEl   = document.getElementById('hero');
+    const footerEl = document.querySelector('footer');
 
     window.addEventListener('scroll', () => {
-      const past = window.scrollY > heroHeight * 0.85;
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-      waFloat.style.opacity   = past ? '1' : '0';
-      waFloat.style.pointerEvents = past ? 'auto' : 'none';
+      const sy          = window.scrollY;
+      const heroBottom  = heroEl.offsetTop + heroEl.offsetHeight * 0.85;
+      const footerTop   = footerEl.offsetTop - window.innerHeight * 0.15;
+      const visible     = sy > heroBottom && sy < footerTop;
+      nav.classList.toggle('scrolled', sy > 60);
+      waFloat.style.opacity      = visible ? '1' : '0';
+      waFloat.style.pointerEvents = visible ? 'auto' : 'none';
     }, { passive: true });
 
     /* ── PARALLAX: hero bg & band bg ── */
