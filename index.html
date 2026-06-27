@@ -740,6 +740,12 @@
       box-shadow: 0 8px 32px rgba(37,211,102,0.7);
     }
 
+    .wa-float {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.25s, box-shadow 0.25s;
+    }
+
     .wa-float svg { width: 30px; height: 30px; fill: #fff; }
 
     /* pulse ring */
@@ -1190,8 +1196,14 @@
 
     /* ── NAV scroll ── */
     const nav = document.getElementById('nav');
+    const waFloat = document.querySelector('.wa-float');
+    const heroHeight = document.getElementById('hero').offsetHeight;
+
     window.addEventListener('scroll', () => {
+      const past = window.scrollY > heroHeight * 0.85;
       nav.classList.toggle('scrolled', window.scrollY > 60);
+      waFloat.style.opacity   = past ? '1' : '0';
+      waFloat.style.pointerEvents = past ? 'auto' : 'none';
     }, { passive: true });
 
     /* ── PARALLAX: hero bg & band bg ── */
