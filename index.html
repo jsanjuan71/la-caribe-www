@@ -1104,12 +1104,23 @@
   </div>
 
   <script>
+    const lb = document.getElementById('lightbox');
+
     document.querySelectorAll('.menu-img-full').forEach(img => {
       img.addEventListener('click', () => {
-        const lb = document.getElementById('lightbox');
         document.getElementById('lightbox-img').src = img.src;
         lb.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
       });
+    });
+
+    lb.addEventListener('click', () => {
+      lb.style.display = 'none';
+      document.body.style.overflow = '';
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { lb.style.display = 'none'; document.body.style.overflow = ''; }
     });
 
     /* ── NAV scroll ── */
