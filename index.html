@@ -1183,8 +1183,8 @@
 
   <!-- LIGHTBOX -->
   <div id="lightbox" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.92);align-items:center;justify-content:center">
-    <button id="lightbox-close" aria-label="Cerrar" style="position:absolute;top:1.2rem;right:1.2rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;width:42px;height:42px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);transition:background 0.2s" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    <button id="lightbox-close" aria-label="Cerrar" style="position:absolute;top:1.2rem;right:1.2rem;background:var(--amarillo);border:none;color:#111;width:56px;height:56px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(245,197,24,0.5);transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='scale(1.12)';this.style.boxShadow='0 6px 28px rgba(245,197,24,0.8)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(245,197,24,0.5)'">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <img id="lightbox-img" style="max-width:92vw;max-height:92vh;border-radius:8px;box-shadow:0 0 80px rgba(0,0,0,0.8);object-fit:contain" src="" alt=""/>
   </div>
