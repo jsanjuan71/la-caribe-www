@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mariscos La Caribe — Cevichería & Aguachilería</title>
+  <style>
+    :root {
+      --amarillo: #F5C518;
+      --turquesa: #0DA3A3;
+      --verde: #1A7A3A;
+      --naranja: #E87722;
+      --negro: #111111;
+      --crema: #FDF6E3;
+      --blanco: #FFFFFF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--negro);
+      color: var(--blanco);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(6px);
+    }
+
+    nav .brand {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--amarillo);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul a {
+      color: var(--blanco);
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.85;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--amarillo); opacity: 1; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--negro);
+    }
+
+    #hero img.hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+    }
+
+    #hero .overlay {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+      max-width: 800px;
+    }
+
+    #hero .eyebrow {
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--turquesa);
+      margin-bottom: 1rem;
+    }
+
+    #hero h1 {
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--amarillo);
+      text-shadow: 0 4px 30px rgba(0,0,0,0.8);
+      margin-bottom: 1rem;
+    }
+
+    #hero h1 span { color: var(--blanco); }
+
+    #hero .tagline {
+      font-family: Arial, sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+    }
+
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      padding: 1rem 2.2rem;
+      border-radius: 50px;
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    }
+
+    .btn-wa:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.6);
+    }
+
+    .btn-wa svg { width: 22px; height: 22px; fill: #fff; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 2rem; }
+
+    .section-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--turquesa);
+      margin-bottom: 0.75rem;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--amarillo);
+      margin-bottom: 1.25rem;
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      font-family: Arial, sans-serif;
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 600px;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: #0d0d0d;
+    }
+
+    #about .inner {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    #about img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      max-height: 520px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+
+    #about blockquote {
+      border-left: 3px solid var(--amarillo);
+      padding-left: 1.2rem;
+      margin-top: 2rem;
+      font-style: italic;
+      color: var(--amarillo);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    /* ── MENU GRID ── */
+    #menu {
+      background: #111;
+    }
+
+    #menu .inner {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .menu-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .menu-header .subtitle { margin: auto; }
+
+    .menu-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--amarillo);
+      border-color: var(--amarillo);
+      color: var(--negro);
+    }
+
+    .menu-panel { display: none; }
+    .menu-panel.active { display: block; }
+
+    .menu-img-full {
+      width: 100%;
+      max-width: 780px;
+      display: block;
+      margin: auto;
+      border-radius: 12px;
+      box-shadow: 0 16px 50px rgba(0,0,0,0.6);
+    }
+
+    /* ── GALLERY ── */
+    #galeria {
+      background: #0a0a0a;
+    }
+
+    #galeria .inner {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .gallery-header { margin-bottom: 2.5rem; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s, opacity 0.3s;
+      cursor: pointer;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.03);
+      opacity: 0.9;
+    }
+
+    /* ── ESPECIALIDADES ── */
+    #especiales {
+      background: #111;
+    }
+
+    #especiales .inner {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.25s;
+    }
+
+    .card:hover { transform: translateY(-4px); }
+
+    .card-icon {
+      font-size: 2.5rem;
+      padding: 1.5rem 1.5rem 0.5rem;
+    }
+
+    .card-body { padding: 0 1.5rem 1.5rem; }
+
+    .card h3 {
+      font-size: 1.1rem;
+      color: var(--amarillo);
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+    }
+
+    /* ── INFO ── */
+    #info {
+      background: #0d0d0d;
+    }
+
+    #info .inner {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem;
+    }
+
+    .info-block h3 {
+      font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--turquesa);
+      margin-bottom: 1rem;
+    }
+
+    .info-block p, .info-block li {
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 2;
+    }
+
+    .info-block ul { list-style: none; }
+
+    .info-block a {
+      color: var(--amarillo);
+      text-decoration: none;
+    }
+
+    .info-block a:hover { text-decoration: underline; }
+
+    .horario-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, sans-serif;
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.7);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .horario-row span:last-child { color: var(--amarillo); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    footer strong { color: var(--amarillo); }
+
+    /* ── FLOATING WA ── */
+    .wa-float {
+      position: fixed;
+      bottom: 1.8rem;
+      right: 1.8rem;
+      z-index: 200;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+      transition: transform 0.2s;
+    }
+
+    .wa-float:hover { transform: scale(1.1); }
+    .wa-float svg { width: 32px; height: 32px; fill: #fff; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+
+      #about .inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="brand">La Caribe</div>
+    <ul>
+      <li><a href="#about">Nosotros</a></li>
+      <li><a href="#menu">Menú</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#info">Visítanos</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <img
+      class="hero-bg"
+      src="data/WhatsApp Image 2026-06-27 at 12.28.01 PM.jpeg"
+      alt="La Caribe"
+    />
+    <div class="overlay">
+      <p class="eyebrow">Cevichería &amp; Aguachilería · Zapopan, Jalisco</p>
+      <h1>Mariscos<br/><span>La Caribe</span></h1>
+      <p class="tagline">
+        Del mar a tu mesa — ceviches, aguachiles, hamburguesas de carnes exóticas<br/>
+        y las bebidas tradicionales más auténticas de la región.
+      </p>
+      <a
+        href="https://wa.me/523316063421?text=Hola%20La%20Caribe%2C%20quiero%20hacer%20un%20pedido"
+        class="btn-wa"
+        target="_blank"
+        rel="noopener"
+      >
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.112 1.524 5.837L.057 23.886a.5.5 0 0 0 .611.61l6.102-1.458A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.87 9.87 0 0 1-5.031-1.376l-.36-.214-3.733.892.923-3.658-.235-.376A9.862 9.862 0 0 1 2.1 12C2.1 6.534 6.534 2.1 12 2.1c5.465 0 9.9 4.434 9.9 9.9 0 5.465-4.435 9.9-9.9 9.9z"/>
+        </svg>
+        Pedir por WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="inner">
+      <img
+        src="data/WhatsApp Image 2026-06-27 at 12.28.02 PM.jpeg"
+        alt="Experiencia La Caribe"
+      />
+      <div>
+        <p class="section-label">Quiénes somos</p>
+        <h2>Sabor que<br/>te atrapa</h2>
+        <p class="subtitle">
+          Somos una cevichería con alma caribeña y raíces mexicanas.
+          En La Caribe encontrarás los mejores aguachiles en 13 estilos,
+          ceviches con mariscos frescos del día, hamburguesas al carbón con
+          carnes exóticas —cocodrilo, jabalí, venado, avestruz y búfalo—
+          y bebidas tradicionales como nuestro <strong>Tepulque</strong>,
+          la bebida de la casa hecha con tepache y pulque.
+        </p>
+        <blockquote>
+          "Te esperamos para que disfrutes de lo mejor del mar y la tierra
+          con el auténtico sabor Caribe."
+          <br/>— Henry Vidrio, fundador
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu">
+    <div class="inner">
+      <div class="menu-header">
+        <p class="section-label">Lo que ofrecemos</p>
+        <h2>Nuestro Menú</h2>
+        <p class="subtitle">Selecciona una categoría para ver el menú completo.</p>
+      </div>
+
+      <div class="menu-tabs">
+        <button class="tab-btn active" onclick="showTab('aguachiles', this)">Aguachiles</button>
+        <button class="tab-btn" onclick="showTab('tostitos', this)">Tostitos</button>
+        <button class="tab-btn" onclick="showTab('completo', this)">Menú completo</button>
+        <button class="tab-btn" onclick="showTab('burgers', this)">Burgers exóticas</button>
+        <button class="tab-btn" onclick="showTab('bebidas', this)">Tepulque &amp; Bebidas</button>
+      </div>
+
+      <div id="tab-aguachiles" class="menu-panel active">
+        <img
+          class="menu-img-full"
+          src="data/WhatsApp Image 2026-06-27 at 12.28.01 PM (1).jpeg"
+          alt="Menú de Aguachiles"
+        />
+      </div>
+
+      <div id="tab-tostitos" class="menu-panel">
+        <img
+          class="menu-img-full"
+          src="data/WhatsApp Image 2026-06-27 at 12.28.01 PM (2).jpeg"
+          alt="Tostitos La Caribe"
+        />
+      </div>
+
+      <div id="tab-completo" class="menu-panel">
+        <img
+          class="menu-img-full"
+          src="data/WhatsApp Image 2026-06-27 at 12.28.01 PM (5).jpeg"
+          alt="Menú completo"
+        />
+      </div>
+
+      <div id="tab-burgers" class="menu-panel">
+        <img
+          class="menu-img-full"
+          src="data/WhatsApp Image 2026-06-27 at 12.28.01 PM (6).jpeg"
+          alt="Hamburguesas exóticas al carbón"
+        />
+      </div>
+
+      <div id="tab-bebidas" class="menu-panel">
+        <img
+          class="menu-img-full"
+          src="data/WhatsApp Image 2026-06-27 at 12.28.01 PM (3).jpeg"
+          alt="Tepulque — bebida de la casa"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERÍA -->
+  <section id="galeria">
+    <div class="inner">
+      <div class="gallery-header">
+        <p class="section-label">Galería</p>
+        <h2>Auténtico y fresco</h2>
+      </div>
+      <div class="gallery-grid">
+        <img src="data/WhatsApp Image 2026-06-27 at 12.28.01 PM (4).jpeg" alt="Burger fresca" />
+        <img src="data/WhatsApp Image 2026-06-27 at 12.28.01 PM (3).jpeg" alt="Tepulque" />
+        <img src="data/WhatsApp Image 2026-06-27 at 12.28.02 PM (1).jpeg" alt="Mariscos La Caribe" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ESPECIALIDADES -->
+  <section id="especiales">
+    <div class="inner">
+      <p class="section-label">Por qué La Caribe</p>
+      <h2>Nuestras especialidades</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🦐</div>
+          <div class="card-body">
+            <h3>Aguachiles en 13 estilos</h3>
+            <p>Verde, Rojo, Negro, Cajún, Mangos y Habanero, Satanás, Kora, Macho y más — todos con camarón fresco.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🐊</div>
+          <div class="card-body">
+            <h3>Carnes exóticas al carbón</h3>
+            <p>Hamburguesas de cocodrilo, ciervo rojo, jabalí, avestruz y búfalo. Una experiencia única en Zapopan.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🐟</div>
+          <div class="card-body">
+            <h3>Ceviches del mar</h3>
+            <p>Pez, camarón, marlín, atún, salmón, pulpo y medusa. También ceviche de cocodrilo como especialidad de la casa.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍶</div>
+          <div class="card-body">
+            <h3>Tepulque — bebida de la casa</h3>
+            <p>Nuestro brebaje auténtico: tepache + pulque. Sabor del antiguo México, hecho artesanalmente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO -->
+  <section id="info">
+    <div class="inner">
+      <div class="info-block">
+        <h3>Horarios</h3>
+        <div class="horario-row">
+          <span>Martes a Jueves</span>
+          <span>11:00 AM – 7:00 PM</span>
+        </div>
+        <div class="horario-row">
+          <span>Viernes</span>
+          <span>6:00 PM – Medianoche</span>
+        </div>
+        <div class="horario-row">
+          <span>Sábado y Domingo</span>
+          <span>10:00 AM – Medianoche</span>
+        </div>
+        <div class="horario-row">
+          <span>Lunes</span>
+          <span>Cerrado</span>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <h3>Ubicación</h3>
+        <p>Platino 2, Arenales Tapatíos<br/>Zapopan, Jalisco, México</p>
+        <br/>
+        <a
+          href="https://maps.google.com/?q=Arenales+Tapatios+Zapopan+Jalisco"
+          target="_blank"
+          rel="noopener"
+        >Ver en Google Maps →</a>
+      </div>
+
+      <div class="info-block">
+        <h3>Contacto</h3>
+        <ul>
+          <li>
+            <a href="https://wa.me/523316063421" target="_blank" rel="noopener">
+              📱 WhatsApp: 331 606 3421
+            </a>
+          </li>
+          <li style="margin-top:1rem; color: rgba(255,255,255,0.5); font-size:0.85rem;">
+            Pedidos, reservaciones y consultas<br/>por WhatsApp.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><strong>Mariscos La Caribe</strong> — Cevichería &amp; Aguachilería · Zapopan, Jalisco</p>
+    <p style="margin-top:0.5rem;">Platino 2, Arenales Tapatíos &nbsp;·&nbsp; 331 606 3421</p>
+  </footer>
+
+  <!-- FLOATING WA BUTTON -->
+  <a
+    class="wa-float"
+    href="https://wa.me/523316063421?text=Hola%20La%20Caribe%2C%20quiero%20hacer%20un%20pedido"
+    target="_blank"
+    rel="noopener"
+    aria-label="Contactar por WhatsApp"
+  >
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.112 1.524 5.837L.057 23.886a.5.5 0 0 0 .611.61l6.102-1.458A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.87 9.87 0 0 1-5.031-1.376l-.36-.214-3.733.892.923-3.658-.235-.376A9.862 9.862 0 0 1 2.1 12C2.1 6.534 6.534 2.1 12 2.1c5.465 0 9.9 4.434 9.9 9.9 0 5.465-4.435 9.9-9.9 9.9z"/>
+    </svg>
+  </a>
+
+  <script>
+    function showTab(id, btn) {
+      document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
