@@ -1182,12 +1182,20 @@
   </a>
 
   <!-- LIGHTBOX -->
-  <div id="lightbox" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.92);align-items:center;justify-content:center;cursor:zoom-out" onclick="this.style.display='none'">
+  <div id="lightbox" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.92);align-items:center;justify-content:center">
+    <button id="lightbox-close" aria-label="Cerrar" style="position:absolute;top:1.2rem;right:1.2rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;width:42px;height:42px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);transition:background 0.2s" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
     <img id="lightbox-img" style="max-width:92vw;max-height:92vh;border-radius:8px;box-shadow:0 0 80px rgba(0,0,0,0.8);object-fit:contain" src="" alt=""/>
   </div>
 
   <script>
     const lb = document.getElementById('lightbox');
+
+    function closeLightbox() {
+      lb.style.display = 'none';
+      document.body.style.overflow = '';
+    }
 
     document.querySelectorAll('.menu-img-full').forEach(img => {
       img.addEventListener('click', () => {
@@ -1197,13 +1205,15 @@
       });
     });
 
-    lb.addEventListener('click', () => {
-      lb.style.display = 'none';
-      document.body.style.overflow = '';
+    // cerrar al click en el fondo (no en la imagen ni el botón)
+    lb.addEventListener('click', e => {
+      if (e.target === lb) closeLightbox();
     });
 
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') { lb.style.display = 'none'; document.body.style.overflow = ''; }
+      if (e.key === 'Escape') closeLightbox();
     });
 
     /* ── AUDIO ── */
