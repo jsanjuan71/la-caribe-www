@@ -1151,48 +1151,42 @@
     });
 
     /* ── AUDIO ── */
-    const audio      = document.getElementById('bg-audio');
-    const audioBtn   = document.getElementById('audio-btn');
-    const iconMuted  = document.getElementById('icon-muted');
+    const audio       = document.getElementById('bg-audio');
+    const audioBtn    = document.getElementById('audio-btn');
+    const iconMuted   = document.getElementById('icon-muted');
     const iconPlaying = document.getElementById('icon-playing');
-    let started = false;
 
     audio.volume = 0.35;
 
-    function startAudio() {
-      if (started) return;
-      audio.play().then(() => {
-        started = true;
-        iconMuted.style.display   = 'none';
-        iconPlaying.style.display = 'block';
-      }).catch(() => {});
+    function setPlaying(playing) {
+      iconMuted.style.display   = playing ? 'none'  : 'block';
+      iconPlaying.style.display = playing ? 'block' : 'none';
     }
 
-    // primer clic o scroll activa el audio
-    ['click', 'scroll', 'touchstart'].forEach(ev =>
-      document.addEventListener(ev, startAudio, { once: true, passive: true })
-    );
+    // intenta autoplay inmediato
+    audio.play().then(() => setPlaying(true)).catch(() => {
+      // navegador lo bloqueó: arranca en primer clic en cualquier parte
+      function unlock() {
+        audio.play().then(() => setPlaying(true)).catch(() => {});
+        document.removeEventListener('click', unlock);
+        document.removeEventListener('touchstart', unlock);
+      }
+      document.addEventListener('click', unlock, { passive: true });
+      document.addEventListener('touchstart', unlock, { passive: true });
+    });
 
     audioBtn.addEventListener('click', e => {
       e.stopPropagation();
-      if (!started) { startAudio(); return; }
       if (audio.paused) {
-        audio.play();
-        iconMuted.style.display   = 'none';
-        iconPlaying.style.display = 'block';
+        audio.play().then(() => setPlaying(true)).catch(() => {});
       } else {
         audio.pause();
-        iconMuted.style.display   = 'block';
-        iconPlaying.style.display = 'none';
+        setPlaying(false);
       }
     });
 
-    audioBtn.addEventListener('mouseover', () => {
-      audioBtn.style.transform = 'scale(1.1)';
-    });
-    audioBtn.addEventListener('mouseout', () => {
-      audioBtn.style.transform = 'scale(1)';
-    });
+    audioBtn.addEventListener('mouseover', () => audioBtn.style.transform = 'scale(1.1)');
+    audioBtn.addEventListener('mouseout',  () => audioBtn.style.transform = 'scale(1)');
 
     /* ── NAV scroll ── */
     const nav = document.getElementById('nav');
