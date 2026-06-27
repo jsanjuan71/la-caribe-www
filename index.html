@@ -1087,8 +1087,35 @@
     <p style="margin-top:1rem; font-size:0.72rem">Cevichería &amp; Aguachilería · Hamburguesas al Carbón · Tepulque</p>
   </footer>
 
+  <!-- AUDIO -->
+  <audio id="bg-audio" src="assets/caribean.mp3" loop preload="auto"></audio>
+
+  <!-- AUDIO TOGGLE -->
+  <button
+    id="audio-btn"
+    aria-label="Activar música"
+    style="
+      position:fixed; bottom:2rem; left:2rem; z-index:300;
+      width:48px; height:48px; border-radius:50%; border:none; cursor:pointer;
+      background:rgba(20,20,20,0.85); backdrop-filter:blur(8px);
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 16px rgba(0,0,0,0.5);
+      transition:transform 0.2s, background 0.2s;
+      border: 1px solid rgba(245,197,24,0.25);
+    "
+  >
+    <svg id="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5C518" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
+    </svg>
+    <svg id="icon-playing" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5C518" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+    </svg>
+  </button>
+
   <!-- FLOATING WA -->
-  <a
+  <
     class="wa-float"
     href="https://wa.me/523316063421?text=Hola%20La%20Caribe%2C%20quiero%20hacer%20un%20pedido"
     target="_blank"
@@ -1121,6 +1148,50 @@
 
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') { lb.style.display = 'none'; document.body.style.overflow = ''; }
+    });
+
+    /* ── AUDIO ── */
+    const audio      = document.getElementById('bg-audio');
+    const audioBtn   = document.getElementById('audio-btn');
+    const iconMuted  = document.getElementById('icon-muted');
+    const iconPlaying = document.getElementById('icon-playing');
+    let started = false;
+
+    audio.volume = 0.35;
+
+    function startAudio() {
+      if (started) return;
+      audio.play().then(() => {
+        started = true;
+        iconMuted.style.display   = 'none';
+        iconPlaying.style.display = 'block';
+      }).catch(() => {});
+    }
+
+    // primer clic o scroll activa el audio
+    ['click', 'scroll', 'touchstart'].forEach(ev =>
+      document.addEventListener(ev, startAudio, { once: true, passive: true })
+    );
+
+    audioBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      if (!started) { startAudio(); return; }
+      if (audio.paused) {
+        audio.play();
+        iconMuted.style.display   = 'none';
+        iconPlaying.style.display = 'block';
+      } else {
+        audio.pause();
+        iconMuted.style.display   = 'block';
+        iconPlaying.style.display = 'none';
+      }
+    });
+
+    audioBtn.addEventListener('mouseover', () => {
+      audioBtn.style.transform = 'scale(1.1)';
+    });
+    audioBtn.addEventListener('mouseout', () => {
+      audioBtn.style.transform = 'scale(1)';
     });
 
     /* ── NAV scroll ── */
